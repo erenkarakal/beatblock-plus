@@ -1,0 +1,133 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 0
+
+# add menu text
+[[patches]]
+[patches.pattern]
+target = "states/Menu.lua"
+pattern = '''self.mainMenu:addOption('playdemolevels',function()'''
+position = "before"
+payload = '''
+	self.mainMenu:addText('eren mod active', -17*2, nil)
+'''
+match_indent = false
+
+# fix 'en' appearing before text
+[[patches]]
+[patches.pattern]
+target = "lib/loc.lua"
+pattern = '''local outstr = loc.lang .. "."..s'''
+position = "at"
+payload = '''local outstr = s'''
+match_indent = false
+
+# add percentage to result screen
+[[patches]]
+[patches.pattern]
+target = "states/Results.lua"
+pattern = '''love.graphics.printf(loc.get("averageOffset", {self.offset}),0,209 + self.zoomIn*project.res.cy,project.res.x,"center")'''
+position = "after"
+payload = '''
+  percentageFormatted = string.format("%.2f", self.pctGrade)
+  love.graphics.printf("Accuracy: " .. percentageFormatted .. "%", 0, (226 + self.zoomIn * project.res.cy), project.res.x, "center")
+'''
+match_indent = false
+
+# allow use of scroll bar with number options in OptionList
+[[patches]]
+[patches.pattern]
+target = "obj/OptionsList.lua"
+pattern = '''
+	if option.type == 'number' then
+		local changed = false
+		if maininput:pressed('menu_left') or clickX <= -0.25 then
+			option.object[option.value] = option.object[option.value] - option.increment
+			changed = true
+		elseif maininput:pressed('menu_right') or clickX >= 0.25  then
+			option.object[option.value] = option.object[option.value] + option.increment
+			changed = true
+		end
+'''
+position = "at"
+payload = '''
+	if option.type == 'number' then
+		local changed = false
+		if maininput:pressed('menu_left') or clickX <= -0.25 then
+			option.object[option.value] = option.object[option.value] - option.increment
+			changed = true
+		elseif maininput:pressed('menu_right') or clickX >= 0.25  then
+			option.object[option.value] = option.object[option.value] + option.increment
+			changed = true
+
+		elseif mouse.sy < 0 then
+			option.object[option.value] = option.object[option.value] - 0.01
+			changed = true
+		elseif mouse.sy > 0 then
+			option.object[option.value] = option.object[option.value] + 0.01
+			changed = true
+
+		end
+'''
+match_indent = false
+
+[[patches]]
+[patches.pattern]
+target = "states/Menu.lua"
+pattern = '''
+		end)
+		self.optionsMenu:addOption('back','main',optionsHeight*6)
+'''
+position = "at"
+payload = '''
+		end)
+		self.optionsMenu:addBoolean({'Mute on unfocus:',' Enabled',' Disabled'},savedata.options.audio,'muteOnUnfocus',optionsHeight*5)
+		self.optionsMenu:addOption('back','main',optionsHeight*7)
+'''
+match_indent = false
+
+[[patches]]
+[patches.pattern]
+target = "main.lua"
+pattern = '''function love.load()'''
+position = "before"
+payload = '''
+local defaultVolume = 1
+
+function love.focus(f)
+	if savedata.options.audio.muteOnUnfocus then
+		if f then
+			love.audio.setVolume(defaultVolume)
+		else
+		  defaultVolume = love.audio.getVolume()
+			love.audio.setVolume(0)
+		end
+	end
+end
+'''
+match_indent = false
+
+# add continue button to pause screen (broken, don't use)
+# [[patches]]
+# [patches.pattern]
+# target = "states/Game.lua"
+# pattern = '''self.pauseMenu:addOption('pauseRetry',function()'''
+# position = "before"
+# payload = '''
+#   self.pauseMenu:addOption('Continue', function()
+# 		self.paused = false
+# 		em.paused = false
+# 		self.pauseMenu.allowInput = false
+# 	end, -20)
+# '''
+# match_indent = false
+
+#[[patches]]
+#[patches.pattern]
+#target = "states/Game.lua"
+#pattern = '''self.gm:stopLevel()'''
+#position = "at"
+#payload = ''''''
+#match_indent = false
+#times = 1
