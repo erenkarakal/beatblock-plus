@@ -10,7 +10,7 @@ target = "states/Menu.lua"
 pattern = '''self.mainMenu:addOption('playdemolevels',function()'''
 position = "before"
 payload = '''
-	self.mainMenu:addText('eren mod active', -17*2, nil)
+	self.mainMenu:addText('beatblock plus active', -17*2, nil)
 '''
 match_indent = false
 
