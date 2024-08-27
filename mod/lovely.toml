@@ -72,6 +72,7 @@ payload = '''
 '''
 match_indent = false
 
+# mute on unfocus option
 [[patches]]
 [patches.pattern]
 target = "states/Menu.lua"
@@ -108,7 +109,9 @@ end
 '''
 match_indent = false
 
-# add continue button to pause screen (broken, don't use)
+
+
+# add continue button to pause screen (broken don't use)
 # [[patches]]
 # [patches.pattern]
 # target = "states/Game.lua"
