@@ -1,6 +1,14 @@
 # beatblock-plus
 A quality of life mod for [Beatblock](https://store.steampowered.com/app/3045200/Beatblock/)
 
+## Installation
+> [!WARNING]  
+> lovely-injector is broken as of today. You cannot use this mod until lovely-injector is fixed.
+- Download [lovely-injector](https://github.com/ethangreen-dev/lovely-injector/releases/latest)
+- Put the `version.dll` file in your game folder and launch the game once.
+- Put the `beatblock-plus` folder inside the `%appdata%/beatblock/Mods` folder (not the same as your game folder).
+- Restart the game. You should see a "beatblock plus active" text in your main menu.
+
 ## Features
 - Scroll wheel support for number options\
 ![a](https://github.com/user-attachments/assets/2fa79559-686f-467c-9bb8-9c64e39cba36)
