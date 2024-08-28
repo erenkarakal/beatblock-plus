@@ -16,3 +16,5 @@ A quality of life mod for [Beatblock](https://store.steampowered.com/app/3045200
 
 - Accuracy display at the end screen\
 ![image](https://github.com/user-attachments/assets/c6eda658-c89c-4f18-a805-b7a4e3631e6d)
+
+More coming soon..?
