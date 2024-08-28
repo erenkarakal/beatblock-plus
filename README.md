@@ -6,6 +6,8 @@ A quality of life mod for [Beatblock](https://store.steampowered.com/app/3045200
 - Put the `version.dll` file in your game folder and launch the game once.
 - Put the `beatblock-plus` folder inside the `%appdata%/beatblock/Mods` folder (not the same as your game folder).
 - Restart the game. You should see a "beatblock plus active" text in your main menu.
+> [!CAUTION]
+> Do NOT contact the developers of Beatblock if your game glitches or crashes with this mod.
 
 ## Features
 - Scroll wheel support for number options\
